@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package entite;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 //import java.sql.SQLException;
-
+import utils.DataSource;
 import java.util.Objects;
 
 /**
@@ -26,9 +26,10 @@ public class news {
     private String MOT_CLES;
     private String text;
     private String image;
-    private ResultSet rs;
-
-    public news(int id_cooperation, String title, String TYPE_N, String MOT_CLES, String text, String image) {
+    
+    public news(){}
+    public news(int id_news,int id_cooperation, String title, String TYPE_N, String MOT_CLES, String text, String image) {
+        this.id_news=id_news;
         this.id_cooperation = id_cooperation;
         this.title = title;
         this.TYPE_N = TYPE_N;
@@ -36,7 +37,7 @@ public class news {
         this.text = text;
         this.image = image;
     }
-
+    
     public int getId_news() {
         return id_news;
     }
@@ -142,61 +143,5 @@ public class news {
         }
         return true;
     }
-    public boolean addNews() throws SQLException{
-        Connection connection = Dbsource.getInstance().getConnection();
-        PreparedStatement p= connection.prepareStatement("INSERT INTO news (ID_COOPERATION,TITRE_N,TYPE_N,MOT_CLES,TEXTE_N,IMAGE_N) VALUES (?,?,?,?,?,?);");
-        p.setInt(1, this.getId_cooperation());
-        p.setString(2, this.getTitle());
-        p.setString(3, this.getTYPE_N());
-        p.setString(4, this.getMOT_CLES());
-        p.setString(5,this.getText());
-        p.setString(6,this.getImage());
-        int check=p.executeUpdate();
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("select count(*) from news");
-        rs.next();
-        int count = rs.getInt(1);
-        this.setId_news(count);
-        return check != 0;
-    }
-    public boolean DeleteNews() throws SQLException{
-        Connection connection = Dbsource.getInstance().getConnection();
-        PreparedStatement p= connection.prepareStatement("delete from news where ID_NEWS=?;");
-        p.setInt(1, this.getId_news());
-        return p.executeUpdate() != 0;
-    }
-    public boolean modifynews() throws SQLException{
-        Connection connection = Dbsource.getInstance().getConnection();
-        PreparedStatement p= connection.prepareStatement("Select * from news where ID_NEWS=?;");
-        p.setInt(1, this.getId_news());
-        rs =p.executeQuery();
-        rs.next();
-        //System.err.println(rs.getInt("ID_COOPERATION"));
-        news modified = new news(rs.getInt("ID_COOPERATION"),rs.getString("TITRE_N"),rs.getString("TYPE_N"),rs.getString("MOT_CLES"),rs.getString("TEXTE_N"),rs.getString("IMAGE_N"));
-        if(this.equals(modified)){
-            return false;
-        }
-        else{
-            PreparedStatement mod= connection.prepareStatement("UPDATE news SET ID_COOPERATION=?,TITRE_N=?,TYPE_N=?,MOT_CLES=?,TEXTE_N=?,IMAGE_N=? where ID_NEWS=?;");
-            mod.setInt(1, this.getId_cooperation());
-            mod.setString(2, this.getTitle());
-            mod.setString(3, this.getTYPE_N());
-            mod.setString(4, this.getMOT_CLES());
-            mod.setString(5,this.getText());
-            mod.setString(6,this.getImage());
-            mod.setInt(7,this.getId_news());
-            int check=mod.executeUpdate();
-            return check!=0;
-        }
-    }
-    public news Listenews(int id) throws SQLException{
-        ArrayList<news> Liste = null;
-        Connection connection = Dbsource.getInstance().getConnection();
-        PreparedStatement p= connection.prepareStatement("Select * from news where ID_NEWS=?;");
-        p.setInt(1, id);
-        rs =p.executeQuery();
-        rs.next();
-        news modified = new news(rs.getInt("ID_COOPERATION"),rs.getString("TITRE_N"),rs.getString("TYPE_N"),rs.getString("MOT_CLES"),rs.getString("TEXTE_N"),rs.getString("IMAGE_N"));
-        return modified;
-    }
+    
 }

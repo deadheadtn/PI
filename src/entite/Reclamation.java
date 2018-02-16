@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package entite;
 
 import java.util.Objects;
 
@@ -15,18 +15,28 @@ public class Reclamation {
     private int id_reclamation;
     private int id_utilisateur;
     private int id_followup=0;
+    private String email;
     private String SUJET_REC;
     private String DESCRIPTION_REC;
     private String DATE_REC;
     private String ETAT_REC;
 
-    public Reclamation(int id_utilisateur, int id_followup, String SUJET_REC, String DESCRIPTION_REC, String DATE_REC, String ETAT_REC) {
-        this.id_utilisateur = id_utilisateur;
-        this.id_followup = id_followup;
+    public Reclamation(String email, String SUJET_REC, String DESCRIPTION_REC, String DATE_REC) {
+        //this.id_utilisateur = id_utilisateur;
+        this.email=email;
+        //this.id_followup = id_followup;
         this.SUJET_REC = SUJET_REC;
         this.DESCRIPTION_REC = DESCRIPTION_REC;
         this.DATE_REC = DATE_REC;
-        this.ETAT_REC = ETAT_REC;
+        //this.ETAT_REC = ETAT_REC;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getId_reclamation() {
