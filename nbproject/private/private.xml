@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/FrontNewsController.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/utils/MailService.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/service/Gestion_reclamation.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/ReclamationF.fxml</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/manifest.mf</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/entite/news.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/build.xml</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/ReclamationFController.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/FrontNews.fxml</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/ReclamationController.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/News.fxml</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/service/GestionNews.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/entite/Reclamation.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/MainWindow.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/NewsController.java</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/src/GUI/ReclamationView.fxml</file>
+            <file>file:/home/deadhead/NetBeansProjects/russia2018/nbproject/project.properties</file>
+        </group>
+    </open-files>
+</project-private>

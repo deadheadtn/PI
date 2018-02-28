@@ -22,9 +22,7 @@ public class MainWindow extends Application {
     public void start(Stage primaryStage) {
 
         try {
-            Parent root = FXMLLoader.
-                    load(getClass().getResource("News.fxml"));
-            root.getStylesheets().add(getClass().getResource("bootstrap3.css").toExternalForm());
+            Parent root = FXMLLoader.load(getClass().getResource("ReclamationView.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
