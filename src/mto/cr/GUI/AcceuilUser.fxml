@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="662.0" prefWidth="1108.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mto.cr.GUI.AcceuilController">
+    <stylesheets>
+        <URL value="@newCascadeStyleSheet.css" />
+    </stylesheets>
+    <children>
+      <ImageView fx:id="home" fitHeight="74.0" fitWidth="77.0" layoutX="7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/icon_home.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="581.0" fitWidth="1113.0" layoutX="1.0" layoutY="83.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/fifaHomeScreenBackground1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="59.0" fitWidth="210.0" layoutX="7.0" layoutY="567.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fifaworldcupRussia2018.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="111.0" fitWidth="145.0" layoutX="1000.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/2018_FIFA_World_Cup.png" />
+         </image>
+      </ImageView>
+      <Text fill="#80b201" layoutX="335.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1 VISITER NOTRE FIFA Forum">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fill="#1e1e1efa" layoutX="352.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARTAGEZ AVEC NOUS VOTRE EXPÉRIENCE !">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="68.0" fitWidth="79.0" layoutX="253.0" layoutY="512.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rendement-coop.png" />
+         </image>
+      </ImageView>
+      <Text fill="#80b201" layoutX="333.0" layoutY="605.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 PARTICIPEZ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fill="#1e1e1e" layoutX="347.0" layoutY="629.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACCÉDEZ AUX MATCHS &amp; PRONOSTIQUE! ">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="77.0" fitWidth="79.0" layoutX="246.0" layoutY="571.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/participez.png" />
+         </image>
+      </ImageView>
+      <Text fill="#1e1e1e" layoutX="788.0" layoutY="557.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESERVEZ VOS BILLET &amp; VOS HOTELS">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Text fill="#80b201" layoutX="771.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3 INVESTISSEZ À PARTIR DE 50€ !">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="72.0" fitWidth="79.0" layoutX="689.0" layoutY="501.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/investissez.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="86.0" layoutX="687.0" layoutY="580.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/suivez.png" />
+         </image>
+      </ImageView>
+      <Text fill="#80b201" layoutX="769.0" layoutY="606.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4 SUIVEZ VOTRE EQUIPE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fill="#1e1e1e" layoutX="783.0" layoutY="627.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOUTENEZ VOTRE EQUIPE POUR LA VICTOIRE!">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Text>
+      <Pane fx:id="paneCrowdFunding" layoutX="200.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="photoCrowdFunding" fitHeight="150.0" fitWidth="200.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/investissez.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="paneCrowdSourcing" layoutX="520.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="photoCrowdSourcing" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/cooperative.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="16.0" layoutY="167.0" prefHeight="27.0" prefWidth="53.0" text="FIFA">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="69.0" layoutY="167.0" prefHeight="16.0" prefWidth="123.0" text="Forum" textFill="#80b201">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="paneProfils" layoutX="800.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="photoCrowdProfils" fitHeight="150.0" fitWidth="145.0" layoutX="30.0" layoutY="14.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/perso-coop.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="15.0" layoutY="167.0" prefHeight="27.0" prefWidth="53.0" text="FIFA">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="68.0" layoutY="167.0" prefHeight="16.0" prefWidth="123.0" text="Client" textFill="#80b201">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="MonProfilMenu" layoutX="702.0" layoutY="-112.0" opacity="0.95" prefHeight="289.0" prefWidth="264.0" styleClass="monProfil" translateY="-350">
+         <children>
+            <Button fx:id="buttonAccederMonProfil" layoutX="11.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="238.0" styleClass="buttonLogin" text="Mon Profil" textFill="#f2ffdd">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Separator layoutX="8.0" layoutY="229.0" prefHeight="5.0" prefWidth="245.0" />
+            <ImageView fx:id="PhotoProfilMonProfil" fitHeight="64.0" fitWidth="69.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/checked_checkbox.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="nomPrenomMonProfil" layoutX="86.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chiheb Khédhiri">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="emailMonProfil" layoutX="85.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email@email.com" wrappingWidth="110.466552734375" />
+            <Button fx:id="deconnexion" layoutX="175.0" layoutY="62.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="79.0" styleClass="buttonSuccSolde" text="Déconnexion">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Button>
+         </children></Pane>
+      <Pane layoutX="-1.0" layoutY="-5.0" prefHeight="93.0" prefWidth="1116.0" styleClass="whiteBackGround">
+         <children>
+            <Pane fx:id="dropDownMenu" layoutX="695.0" layoutY="13.0" prefHeight="64.0" prefWidth="219.0">
+               <children>
+                  <Text fx:id="varUsernameToolBar" fill="#ebebeb" layoutX="100.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                  <ImageView fx:id="varPhotoProfilToolBar" fitHeight="59.0" fitWidth="63.0" layoutX="8.0" layoutY="3.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../images/comments-xxl.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <ImageView fx:id="home" fitHeight="59.0" fitWidth="57.0" layoutX="19.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Home_1.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+    
+    </children>
+</AnchorPane>
