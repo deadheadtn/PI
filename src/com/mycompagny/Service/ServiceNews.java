@@ -24,9 +24,9 @@ import java.util.Map;
  */
 public class ServiceNews {
 
-    public void ajoutTask(Task ta) {
+    public void ajouterReclamation(String sujet,String Description) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://41.226.11.243:10004/news/" + ta.getNom() + "/" + ta.getEtat();
+        String Url = "http://41.226.11.243:10004/news/" + sujet + "/" + Description;
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());
