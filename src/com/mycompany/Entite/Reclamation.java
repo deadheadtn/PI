@@ -30,6 +30,9 @@ public class Reclamation {
         //this.ETAT_REC = ETAT_REC;
     }
 
+    public Reclamation() {
+    }
+
     public String getEmail() {
         return email;
     }

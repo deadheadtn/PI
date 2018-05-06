@@ -19,8 +19,11 @@
 
 package com.codename1.uikit.materialscreens;
 
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -69,9 +72,26 @@ public class LoginForm extends Form {
         Button loginButton = new Button("LOGIN");
         loginButton.setUIID("LoginButton");
         loginButton.addActionListener(e -> {
-            Toolbar.setGlobalToolbar(false);
-            new WalkthruForm(theme).show();
-            Toolbar.setGlobalToolbar(true);
+            ConnectionRequest con = new ConnectionRequest();
+            String Url = "http://127.0.0.1/Russia2018Symfony/login.php?username="+login.getText()+"&password="+password.getText();
+            con.setUrl(Url);
+            con.setPost(false);
+            System.err.println(Url);
+            con.addResponseListener((es) -> {
+                String str = new String(con.getResponseData());
+                System.err.println(str);
+                if (str.contains("id")) {
+                    Dialog.show("Sucess", "Login Success", "ok", null);
+                    Toolbar.setGlobalToolbar(false);
+                    new WalkthruForm(theme).show();
+                    Toolbar.setGlobalToolbar(true);
+                }
+                else{
+                Dialog.show("error", "Connection failed", "ok", null);
+                }
+            });
+            NetworkManager.getInstance().addToQueueAndWait(con);
+            
         });
         
         Button createNewAccount = new Button("CREATE NEW ACCOUNT");

@@ -13,7 +13,6 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.Entite.Reclamation;
-import com.mycompany.Entite.news;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +44,12 @@ public class ServiceReclamation {
     }
     
 
-    public ArrayList<news> getList2() {
-        ArrayList<news> listTasks = new ArrayList<>();
+    public ArrayList<Reclamation> getList2(int id) {
+        ArrayList<Reclamation> listTasks = new ArrayList<>();
         ConnectionRequest con = new ConnectionRequest();
         String httpMethod="GET";
         con.setHttpMethod(httpMethod);
-        con.setUrl("http://127.0.0.1/Russia2018Symfony/web/app_dev.php/admin/manage/news/json");
+        con.setUrl("http://127.0.0.1/Russia2018Symfony/web/app_dev.php/admin/manage/reclamation/json?id="+id);
         con.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
@@ -58,19 +57,16 @@ public class ServiceReclamation {
                 JSONParser jsonp = new JSONParser();
                 
                 try {
-                    Map<String, Object> news = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
+                    Map<String, Object> Recl = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
                     //System.out.println(news);
-                    List<Map<String, Object>> list = (List<Map<String, Object>>) news.get("root");
+                    List<Map<String, Object>> list = (List<Map<String, Object>>) Recl.get("Root");
+                    
                     for (Map<String, Object> obj : list) {
-                        news NEWS = new news();
-                        float id = Float.parseFloat(obj.get("id_news").toString());
-                        
-                        NEWS.setId_news((int) id);
-                        NEWS.setTitle(obj.get("titre_n").toString());
-                        NEWS.setText(obj.get("texte_n").toString());
-                        NEWS.setImage(obj.get("image_n").toString());
-                        listTasks.add(NEWS);
-
+                        Reclamation Rec = new Reclamation();
+                        Rec.setSUJET_REC(obj.get("sujet_rec").toString());
+                        Rec.setDESCRIPTION_REC(obj.get("description_rec").toString());
+                        Rec.setETAT_REC(obj.get("description_rec").toString());
+                  listTasks.add(Rec);
                     }
                 } catch (IOException ex) {
                 }

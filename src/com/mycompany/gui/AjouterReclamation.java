@@ -5,13 +5,17 @@
  */
 package com.mycompany.gui;
 
+import com.codename1.components.ImageViewer;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
@@ -20,6 +24,7 @@ import com.codename1.uikit.materialscreens.ProfileForm;
 import com.codename1.uikit.materialscreens.SideMenuBaseForm;
 import com.codename1.uikit.materialscreens.StatsForm;
 import com.mycompagny.Service.ServiceReclamation;
+import java.io.IOException;
 import java.util.Random;
 /**
  *
@@ -31,13 +36,20 @@ public class AjouterReclamation extends SideMenuBaseForm{
     Label DescLabel;
     TextField Sujet;
     TextField Description;
-    Button Valider;
+    Button Valider,listRec;
     Container fselect;
     Label captcha;
     TextField Captcha;
+    ImageViewer imv;
+    Image img;
     public AjouterReclamation(Resources res){
+        
+        /*EncodedImage encoded = EncodedImage.create("/icon.png"); 
+        img = URLImage.createToStorage(encoded, "https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg", "https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg");
+        imv = new ImageViewer(img);*/
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
         f = new Form("ajout");
+        //fselect.add(imv);
         fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
         sujetLabel= new Label(" Sujet:");
         DescLabel= new Label("Description: ");
@@ -56,6 +68,7 @@ public class AjouterReclamation extends SideMenuBaseForm{
         Description.getAllStyles().setFgColor(255);
         Description.getAllStyles().setFont(mediumBoldSystemFont);
         Valider= new Button("Envoyer");
+        listRec= new Button("Mes reclamation");
         fselect.add(sujetLabel);
         fselect.add(Sujet);
         fselect.add(DescLabel);
@@ -63,13 +76,18 @@ public class AjouterReclamation extends SideMenuBaseForm{
         fselect.add(captcha);
         fselect.add(Captcha);
         fselect.add(Valider);
+        fselect.add(listRec);
         f.add(fselect);
         f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);
           h.show();
           });
-        f.getToolbar().addCommandToRightBar("back", null, (ev)->{AfficherReclamation h=new AfficherReclamation(res);
-          h.show();
-          });
+        listRec.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                AfficherReclamation r = new AfficherReclamation(res);
+                r.getF().show();
+            }
+        });
         Valider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
