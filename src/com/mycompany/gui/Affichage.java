@@ -6,6 +6,7 @@
 package com.mycompany.gui;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.RSSReader;
 import com.codename1.components.SpanLabel;
 import com.codename1.io.services.ImageDownloadService;
 import com.codename1.ui.Button;
@@ -17,6 +18,7 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
@@ -47,11 +49,13 @@ public class Affichage extends SideMenuBaseForm {
     Button Viewb;
     public Affichage(Resources res) {
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
-
         f = new Form();
         lb = new SpanLabel("");
         //f.add(lb);
-        
+        Container rss = new Container(new BorderLayout());
+        RSSReader rr = new RSSReader();
+        rr.setURL("https://www.uefa.com/rssfeed/worldcup/rss.xml");
+        rss.addComponent(BorderLayout.CENTER, rr);
         ServiceNews serviceTask=new ServiceNews();
         ArrayList<news> lis=serviceTask.getList2();
         for(int i=0; i<lis.size();i++){
@@ -61,17 +65,18 @@ public class Affichage extends SideMenuBaseForm {
             titre.setText(lis.get(i).getTitle());
             titre.getUnselectedStyle().setFont(mediumBoldSystemFont);
             texte.setText(lis.get(i).getText());
-            Button Viewb = new Button("View more");
-            fselect.add(titre);
-            fselect.add(texte);
-            fselect.add(Viewb);
+            //Button Viewb = new Button("View more");
+            //fselect.add(titre);
+            //fselect.add(texte);
+            //fselect.add(Viewb);
             f.add(fselect);
         }
+          f.add(rss);
           f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);
           h.show();
           });
     }
-
+    
     public Form getF() {
         return f;
     }

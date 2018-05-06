@@ -29,6 +29,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.gui.Affichage;
+import com.mycompany.gui.AjouterReclamation;
 
 /**
  * Common code that can setup the side menu
@@ -69,6 +70,7 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  Reservation", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Matches", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Equipes", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Reclamation", FontImage.MATERIAL_EXIT_TO_APP,  e -> new AjouterReclamation(res).getF().show());
     }
     
     protected abstract void showOtherForm(Resources res);
