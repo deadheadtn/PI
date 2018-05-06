@@ -20,8 +20,11 @@ import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.ProfileForm;
 import com.codename1.uikit.materialscreens.SideMenuBaseForm;
 import com.codename1.uikit.materialscreens.StatsForm;
+import com.company.utils.Local;
+import com.mycompagny.Service.Authentification;
 import com.mycompagny.Service.ServiceReclamation;
 import com.mycompany.Entite.Reclamation;
+import com.mycompany.Entite.User;
 import com.mycompany.Entite.news;
 import java.util.ArrayList;
 
@@ -52,9 +55,9 @@ public class AfficherReclamation extends SideMenuBaseForm {
     public AfficherReclamation(Resources res){
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
         f= new Form("Mes Reclamations");
-        int user_id=1;
+        User u = new Local().getUser();
         ServiceReclamation r = new ServiceReclamation();
-        ArrayList<Reclamation> lis=r.getList2(user_id);
+        ArrayList<Reclamation> lis=r.getList2(u.getId());
         for(int i=0; i<lis.size();i++){
             fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
             fdesc  = new Container (new BoxLayout(BoxLayout.X_AXIS));

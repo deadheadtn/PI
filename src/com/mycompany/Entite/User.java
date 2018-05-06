@@ -54,8 +54,18 @@ public class User {
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;
-        this.jeton = jeton;
-        this.nationalite = nationalite;
+        this.password = password;
+        this.num= num;
+        this.enabled=enabled;
+        this.code=code;
+    }
+
+    public User(int parseInt, String get, String get0, String get1, String get2, String get3, String get4, int parseInt0, String get5) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
         this.password = password;
         this.num= num;
         this.enabled=enabled;

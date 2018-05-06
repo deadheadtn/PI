@@ -35,6 +35,11 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.company.utils.Local;
+import com.mycompagny.Service.Authentification;
+import com.mycompany.Entite.User;
+import java.io.IOException;
+
 
 /**
  * The Login form
@@ -76,12 +81,18 @@ public class LoginForm extends Form {
             String Url = "http://127.0.0.1/Russia2018Symfony/login.php?username="+login.getText()+"&password="+password.getText();
             con.setUrl(Url);
             con.setPost(false);
-            System.err.println(Url);
             con.addResponseListener((es) -> {
                 String str = new String(con.getResponseData());
-                System.err.println(str);
-                if (str.contains("id")) {
+                if (!str.contains("error")) {
                     Dialog.show("Sucess", "Login Success", "ok", null);
+                    Authentification a = new Authentification();
+                    int id= Integer.parseInt(str.toString());
+                        User u = a.login(id);
+                        Local dblocal = new Local();
+                    try {
+                        dblocal.insert(u);
+                    } catch (IOException ex) {
+                    }
                     Toolbar.setGlobalToolbar(false);
                     new WalkthruForm(theme).show();
                     Toolbar.setGlobalToolbar(true);

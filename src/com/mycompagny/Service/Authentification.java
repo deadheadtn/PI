@@ -41,15 +41,14 @@ public class Authentification {
            
     public User login(int id){
      try {
-                ConnectionRequest request = new ConnectionRequest("http://localhost/mobile/russia/getuser.php?id="+id);
-                
+         String url ="http://127.0.0.1/Russia2018Symfony/getuser.php?id="+id;
+                ConnectionRequest request = new ConnectionRequest(url);
+                request.setPost(false);
                 NetworkManager.getInstance().addToQueueAndWait(request);
                 Map<String,Object> result= new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(request.getResponseData()), "UTF-8"));
-                
                 Map<String,String> userjson=(Map<String,String>) result.get("user");
-                user=new User(Integer.parseInt(userjson.get("id")), userjson.get("username"), userjson.get("email"),userjson.get("nom"),userjson.get("prenom") ,Integer.parseInt(userjson.get("jeton")),userjson.get("nationalite"),userjson.get("password"),userjson.get("num"),Integer.parseInt(userjson.get("enabled")),userjson.get("confirmation_token"));
-                //System.out.println(user);
-                
+                user=new User(Integer.parseInt(userjson.get("id")), userjson.get("username"), userjson.get("email"),userjson.get("nom"),userjson.get("prenom") ,userjson.get("password"),userjson.get("num_tel"),Integer.parseInt(userjson.get("enabled")),userjson.get("confirmation_token"));
+                System.out.println(user);
             } catch (IOException ex) {
                 //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             } 

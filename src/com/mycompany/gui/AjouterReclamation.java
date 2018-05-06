@@ -23,7 +23,9 @@ import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.ProfileForm;
 import com.codename1.uikit.materialscreens.SideMenuBaseForm;
 import com.codename1.uikit.materialscreens.StatsForm;
+import com.company.utils.Local;
 import com.mycompagny.Service.ServiceReclamation;
+import com.mycompany.Entite.User;
 import java.io.IOException;
 import java.util.Random;
 /**
@@ -53,10 +55,11 @@ public class AjouterReclamation extends SideMenuBaseForm{
         fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
         sujetLabel= new Label(" Sujet:");
         DescLabel= new Label("Description: ");
-        int Max=10,Min=2;
+        User u = new Local().getUser();
+        System.out.println(u.getId());
         Random R= new Random();
         Random R1= new Random();
-        int nombreAleatoire1 = R.nextInt(10);
+        int nombreAleatoire1 = R.nextInt(12);
         int nombreAleatoire = R1.nextInt(10);
         int Somme= nombreAleatoire1+nombreAleatoire;
         captcha = new Label("Captcha: "+nombreAleatoire1+"+"+nombreAleatoire+"=");
@@ -96,7 +99,7 @@ public class AjouterReclamation extends SideMenuBaseForm{
                 }
                 else if(Description.getText().length()>5 && Sujet.getText().length()>5 && Captcha.getText().equals(Integer.toString(Somme))){
                     ServiceReclamation s= new ServiceReclamation();
-                    s.ajouterReclamation(1, Sujet.getText(), Description.getText());
+                    s.ajouterReclamation(u.getId(), Sujet.getText(), Description.getText());
                 }
                 else{
                     Dialog.show("error", "Captcha Error", "ok", null);
