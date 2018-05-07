@@ -39,7 +39,7 @@ public class Affichageappreciation {
     URLImage urlImage;
     Container fimg,fdesc,fselect;
     Image img;
-    Button Viewb;
+    //Button Viewb;
     Button ajouterapp;
     public Affichageappreciation(Resources res) {
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
@@ -66,7 +66,7 @@ public class Affichageappreciation {
             //Button Viewb = new Button("View more");
             fselect.add(nom);
             fselect.add(appreciation);
-            fselect.add(Viewb);
+           //fselect.add(Viewb);
             f.add(fselect);
         }
           f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);

@@ -25,6 +25,8 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
@@ -34,7 +36,10 @@ import com.mycompany.gui.AffichageHotel;
 import com.mycompany.gui.AffichageTransport;
 import com.mycompany.gui.Affichageappreciation;
 import com.mycompany.gui.Affichageequipe;
+import com.mycompany.gui.Affichagejoueur;
 import com.mycompany.gui.AjouterReclamation;
+import com.mycompany.gui.Statistic;
+import com.mycompany.gui.TicketForm;
 
 /**
  * Common code that can setup the side menu
@@ -68,7 +73,23 @@ public abstract class SideMenuBaseForm extends Form {
             Transport t =new Transport();
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
-        
+        getToolbar().addMaterialCommandToSideMenu("  Joueurs", FontImage.MATERIAL_DASHBOARD,  e -> new Affichagejoueur(res).getF().show());
+      //  getToolbar().addMaterialCommandToSideMenu("  Statistiques", FontImage.MATERIAL_DASHBOARD, e -> new Statistic(res).getF().show());
+      
+        getToolbar().addMaterialCommandToSideMenu("Statistique", FontImage.MATERIAL_DASHBOARD,new ActionListener() {
+           
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+//                   ChartDemosForm demos = new ChartDemosForm();
+//        current = demos;
+//        demos.show();  
+        Statistic c= new Statistic();
+        c.createPieChartForm().show();
+            }
+
+            
+        });
+                  
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Accueil", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Actualités", FontImage.MATERIAL_TRENDING_UP,  e -> new Affichage(res).getF().show());
@@ -76,6 +97,7 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  Reservation Transport", FontImage.MATERIAL_ACCESS_TIME,  e ->new AffichageTransport(t, res).getF().show());
         getToolbar().addMaterialCommandToSideMenu("  Equipes", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageequipe(res).getF().show());
         getToolbar().addMaterialCommandToSideMenu("  FeedBack", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageappreciation(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("Tickets", FontImage.MATERIAL_SMARTPHONE,  e -> new TicketForm(res).getF().show() );
         getToolbar().addMaterialCommandToSideMenu("  Reclamation", FontImage.MATERIAL_EXIT_TO_APP,  e -> new AjouterReclamation(res).getF().show());
     }
     
