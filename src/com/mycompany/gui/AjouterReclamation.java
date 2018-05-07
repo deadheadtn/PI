@@ -104,7 +104,7 @@ public class AjouterReclamation extends SideMenuBaseForm{
                     ConnectionRequest con = new ConnectionRequest();
             String httpMethod="GET";
             con.setHttpMethod(httpMethod);
-            con.setUrl("http://127.0.0.1/Russia2018Symfony/mobile.php?num="+u.getNum()+"&message="+Description.getText());
+            con.setUrl("http://127.0.0.1/Russia2018Symfony/mobile.php?num=+216"+u.getNum()+"&message="+Description.getText());
             con.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
