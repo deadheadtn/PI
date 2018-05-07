@@ -47,7 +47,17 @@ public class Authentification {
                 NetworkManager.getInstance().addToQueueAndWait(request);
                 Map<String,Object> result= new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(request.getResponseData()), "UTF-8"));
                 Map<String,String> userjson=(Map<String,String>) result.get("user");
-                user=new User(Integer.parseInt(userjson.get("id")), userjson.get("username"), userjson.get("email"),userjson.get("nom"),userjson.get("prenom") ,userjson.get("password"),userjson.get("num_tel"),Integer.parseInt(userjson.get("enabled")),userjson.get("confirmation_token"));
+                user=new User();
+                user.setId(Integer.parseInt(userjson.get("id")));
+                        user.setUsername(userjson.get("username"));
+                        user.setEmail(userjson.get("email"));
+                        user.setNom(userjson.get("nom"));
+                        user.setPrenom(userjson.get("prenom"));
+                        user.setPassword(userjson.get("password"));
+                        user.setNum(userjson.get("num_tel"));
+                        user.setEnabled(Integer.parseInt(userjson.get("enabled")));
+                        user.setCode(userjson.get("confirmation_token"));
+                        
                 System.out.println(user);
             } catch (IOException ex) {
                 //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

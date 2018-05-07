@@ -19,15 +19,13 @@ import java.util.ArrayList;
  */
 public class Local {
        Database db;
-       
-     
     public void insert(User u ) throws IOException{
    
       delete();
        
      try {
            db = Database.openOrCreate("Russia");
-           db.execute("create table if not exists user (id INTEGER PRIMARY KEY, nom TEXT, prenom TEXT,username TEXT,jeton INTEGER,mail TEXT,nationalite TEXT,password TEXT,num TEXT,code TEXT);");
+           db.execute("create table if not exists user (id INTEGER PRIMARY KEY, nom TEXT, prenom TEXT,username TEXT,password TEXT,mail TEXT,num TEXT,code TEXT);");
 
          System.out.println(u.toString());
          db.execute("insert into user(id,nom,prenom,username,mail,password,num,code)  values ('"+u.getId()+"','"+u.getNom()+"','"+u.getPrenom()+"','"+u.getUsername()+"','"+u.getEmail()+"','"+u.getPassword()+"','"+u.getNum()+"','"+u.getCode()+"' );");
@@ -69,16 +67,15 @@ public class Local {
                            data.add(currentRowArray);
                            next = cur.next();
                            
-                           u.setId(Integer.parseInt(data.get(0)[0])+1);
+                           u.setId(Integer.parseInt(data.get(0)[0]));
                            
                            u.setNom(data.get(0)[1]);
                            u.setPrenom(data.get(0)[2]);
                            u.setUsername(data.get(0)[3]);
-                           u.setEmail(data.get(0)[5]);
-                           u.setPassword(data.get(0)[7]);
-                            u.setNum(data.get(0)[8]);
-                             u.setCode(data.get(0)[9]);
-                           System.out.println(u);
+                           u.setEmail(data.get(0)[4]);
+                           u.setPassword(data.get(0)[5]);
+                            u.setNum(data.get(0)[6]);
+                             u.setCode(data.get(0)[7]);
                            
                        }
                        

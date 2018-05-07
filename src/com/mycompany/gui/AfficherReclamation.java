@@ -15,17 +15,19 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.Border;
+import static com.codename1.ui.plaf.Style.BACKGROUND_NONE;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.ProfileForm;
 import com.codename1.uikit.materialscreens.SideMenuBaseForm;
 import com.codename1.uikit.materialscreens.StatsForm;
 import com.company.utils.Local;
-import com.mycompagny.Service.Authentification;
 import com.mycompagny.Service.ServiceReclamation;
 import com.mycompany.Entite.Reclamation;
 import com.mycompany.Entite.User;
-import com.mycompany.Entite.news;
 import java.util.ArrayList;
 
 /**
@@ -45,7 +47,7 @@ public class AfficherReclamation extends SideMenuBaseForm {
     URLImage urlImage;
     Container fimg,fdesc,ftitre,fetat;
     Image img;
-    Button Viewb;
+    Button Viewb,changeretat;
     Label titre;
     Label Texte;
     Label etat;
@@ -67,15 +69,35 @@ public class AfficherReclamation extends SideMenuBaseForm {
             Texte=new Label();
             etat= new Label();
             Sujet=new Label("Sujet:");
+            changeretat = new Button("Changer etat");
+            fetat.getAllStyles().setFgColor(255);
+            fetat.getAllStyles().setBgTransparency(255);
+            fetat.getAllStyles().setBackgroundType(BACKGROUND_NONE);
+            fetat.getAllStyles().setBorder(Border.createEmpty());
+            fetat.getAllStyles().setBgColor(0x99CCCC);
+            fselect.getAllStyles().setFgColor(255);
+            fselect.getAllStyles().setBgTransparency(255);
+            fselect.getAllStyles().setBackgroundType(BACKGROUND_NONE);
+            fselect.getAllStyles().setBorder(Border.createEmpty());
+            fselect.getAllStyles().setBgColor(0xd1e2ff);
             Desc=new Label("Description:");
             EtAt= new Label("Etat:");
             titre.setText(lis.get(i).getSUJET_REC());
             Texte.setText(lis.get(i).getDESCRIPTION_REC());
             titre.getUnselectedStyle().setFont(mediumBoldSystemFont);
-            if(lis.get(i).getETAT_REC().equals("0"))
+            if(lis.get(i).getETAT_REC()==0){
                 etat.setText("Non-Resolu");
+                fetat.getAllStyles().setBgColor(0xFF0000);
+            }
+            else if (lis.get(i).getETAT_REC()==1){
+                etat.setText("En Cours");
+                fetat.getAllStyles().setBgColor(0xfff400);
+            }
             else
-                etat.setText("Resolu");
+            {
+                 etat.setText("Resolu");
+                 fetat.getAllStyles().setBgColor(0xb2aa00);
+            }
             ftitre.add(Sujet);
             ftitre.add(titre);
             fdesc.add(Desc);
@@ -83,9 +105,21 @@ public class AfficherReclamation extends SideMenuBaseForm {
             fetat.add(EtAt);
             fetat.add(etat);
             fselect.add(ftitre);
-            fselect.add(fetat);
             fselect.add(fdesc);
+            fselect.add(fetat);
+            changeretat.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                ServiceReclamation r = new ServiceReclamation();
+                for(int i=0; i<lis.size();i++){
+                    if(lis.get(i).getSUJET_REC().equals(titre.getText())){
+                        r.setetat(lis.get(i).getId_reclamation());
+                    }
+                }
+            }
+        });
+            fselect.add(changeretat);
             f.add(fselect);
+            
         }
         f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);
           h.show();

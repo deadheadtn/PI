@@ -18,7 +18,7 @@ public class Reclamation {
     private String SUJET_REC;
     private String DESCRIPTION_REC;
     private String DATE_REC;
-    private String ETAT_REC;
+    private int ETAT_REC;
 
     public Reclamation(String email, String SUJET_REC, String DESCRIPTION_REC, String DATE_REC) {
         //this.id_utilisateur = id_utilisateur;
@@ -89,11 +89,11 @@ public class Reclamation {
         this.DATE_REC = DATE_REC;
     }
 
-    public String getETAT_REC() {
+    public int getETAT_REC() {
         return ETAT_REC;
     }
 
-    public void setETAT_REC(String ETAT_REC) {
+    public void setETAT_REC(int ETAT_REC) {
         this.ETAT_REC = ETAT_REC;
     }
 

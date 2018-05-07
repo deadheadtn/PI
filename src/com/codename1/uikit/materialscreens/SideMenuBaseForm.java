@@ -28,7 +28,12 @@ import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.Entite.Transport;
 import com.mycompany.gui.Affichage;
+import com.mycompany.gui.AffichageHotel;
+import com.mycompany.gui.AffichageTransport;
+import com.mycompany.gui.Affichageappreciation;
+import com.mycompany.gui.Affichageequipe;
 import com.mycompany.gui.AjouterReclamation;
 
 /**
@@ -60,16 +65,17 @@ public abstract class SideMenuBaseForm extends Form {
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
         Label profilePicLabel = new Label("  Jennifer Wilson", profilePic, "SideMenuTitle");
         profilePicLabel.setMask(mask.createMask());
-
+            Transport t =new Transport();
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
         
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Accueil", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Actualités", FontImage.MATERIAL_TRENDING_UP,  e -> new Affichage(res).getF().show());
-        getToolbar().addMaterialCommandToSideMenu("  Reservation", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Matches", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Equipes", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation Hotel", FontImage.MATERIAL_ACCESS_TIME,  e -> new AffichageHotel(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation Transport", FontImage.MATERIAL_ACCESS_TIME,  e ->new AffichageTransport(t, res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  Equipes", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageequipe(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  FeedBack", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageappreciation(res).getF().show());
         getToolbar().addMaterialCommandToSideMenu("  Reclamation", FontImage.MATERIAL_EXIT_TO_APP,  e -> new AjouterReclamation(res).getF().show());
     }
     

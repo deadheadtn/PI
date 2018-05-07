@@ -6,28 +6,38 @@
 package com.mycompany.gui;
 
 import com.codename1.components.ImageViewer;
-import com.codename1.components.RSSReader;
+import com.codename1.components.SpanButton;
 import com.codename1.components.SpanLabel;
+import com.codename1.io.Log;
 import com.codename1.io.services.ImageDownloadService;
 import com.codename1.ui.Button;
+import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
+import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.animations.ComponentAnimation;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.geom.Dimension;
-import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.plaf.Border;
-import static com.codename1.ui.plaf.Style.BACKGROUND_NONE;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.ProfileForm;
 import com.codename1.uikit.materialscreens.SideMenuBaseForm;
 import com.codename1.uikit.materialscreens.StatsForm;
+import com.mycompagny.Service.ServiceHotel;
 import com.mycompagny.Service.ServiceNews;
+import com.mycompany.Entite.Hotel;
 import com.mycompany.Entite.news;
 import java.util.ArrayList;
 
@@ -35,11 +45,12 @@ import java.util.ArrayList;
  *
  * @author sana
  */
-public class Affichage extends SideMenuBaseForm {
+public class AffichageHotel extends SideMenuBaseForm {
 
     Form f;
     SpanLabel lb;
     private Resources res;
+    private Form home;
     Label label;
     Label Titre;
     Label texte;
@@ -49,41 +60,54 @@ public class Affichage extends SideMenuBaseForm {
     Container fimg,fdesc,fselect;
     Image img;
     Button Viewb;
-    public Affichage(Resources res) {
+    Form f2;
+    private Resources theme;
+
+    public AffichageHotel(Resources res ) {
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
+
         f = new Form();
         lb = new SpanLabel("");
+        Toolbar tb=f.getToolbar();
+
         //f.add(lb);
-        Container rss = new Container(new BorderLayout());
-        RSSReader rr = new RSSReader();
-        rr.setURL("https://www.uefa.com/rssfeed/worldcup/rss.xml");
-        rr.getAllStyles().setFgColor(255);
-            rr.getAllStyles().setBgTransparency(255);
-            rr.getAllStyles().setBackgroundType(BACKGROUND_NONE);
-            rr.getAllStyles().setBorder(Border.createEmpty());
-            rr.getAllStyles().setBgColor(0xd1e2ff);
-        rss.addComponent(BorderLayout.CENTER, rr);
-        ServiceNews serviceTask=new ServiceNews();
-        ArrayList<news> lis=serviceTask.getList2();
+        
+        ServiceHotel serviceTask=new ServiceHotel();
+        ArrayList<Hotel> lis=serviceTask.getList2();
+       home = new Form("Listes Des Hotels",BoxLayout.y());
+
         for(int i=0; i<lis.size();i++){
-            fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
+            
+            fselect  = new Container (new BoxLayout(BoxLayout.X_AXIS));
             Label titre=new Label();
             Label texte=new Label();
-            titre.setText(lis.get(i).getTitle());
+            titre.setText(lis.get(i).getNom_hotel());
             titre.getUnselectedStyle().setFont(mediumBoldSystemFont);
-            texte.setText(lis.get(i).getText());
-            //Button Viewb = new Button("View more");
-            //fselect.add(titre);
-            //fselect.add(texte);
-            //fselect.add(Viewb);
-            f.add(fselect);
-        }
-          f.add(rss);
-          f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);
+            Button Viewb = new Button("View more");
+            Viewb.getAllStyles().setTextDecoration(Style.TEXT_DECORATION_3D);
+            fselect.add(titre);
+            fselect.add(texte);
+            fselect.add(Viewb);
+               fselect.setLeadComponent(Viewb);
+               DetailsForm df = new DetailsForm(lis.get(i), res) ;
+                f.add(fselect);
+               Viewb.addPointerPressedListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                   df.getF().show();
+                   f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);
           h.show();
           });
-    }
+                    } 
+                });
+             
+               
+         //home.show();
     
+    }
+        
+
+}
     public Form getF() {
         return f;
     }

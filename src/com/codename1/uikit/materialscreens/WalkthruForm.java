@@ -58,7 +58,7 @@ public class WalkthruForm extends Form {
         walkthruTabs.hideTabs();
         
         Image notes = res.getImage("notes.png");
-        Image duke = res.getImage("duke.png");
+        Image duke = res.getImage("call_right_arrow.png");
         
         Label notesPlaceholder = new Label("","ProfilePic");
         Label notesLabel = new Label(notes, "ProfilePic");
@@ -66,26 +66,10 @@ public class WalkthruForm extends Form {
         Component.setSameWidth(notesLabel, notesPlaceholder);
         Label bottomSpace = new Label();
         
-        Container tab1 = BorderLayout.centerAbsolute(BoxLayout.encloseY(
-                notesPlaceholder,
-                new Label("Keep track of your tasks", "WalkthruWhite"),
-                new SpanLabel("Never miss an appointment, never forget about your " +
-                                            "daily team meeting and remember when your favorite " +
-                                            "team is playing.",  "WalkthruBody"),
-                bottomSpace
-        ));
-        tab1.setUIID("WalkthruTab1");
-        
-        walkthruTabs.addTab("", tab1);
-        
         Label bottomSpaceTab2 = new Label();
         
         Container tab2 = BorderLayout.centerAbsolute(BoxLayout.encloseY(
                 new Label(duke, "ProfilePic"),
-                new Label("Codename One", "WalkthruWhite"),
-                new SpanLabel("Write once run anywhere native mobile development " +
-                                            "Get Java working on all devices as it was always meant " +
-                                            "to be!",  "WalkthruBody"),
                 bottomSpaceTab2
         ));
         
@@ -115,8 +99,7 @@ public class WalkthruForm extends Form {
                 rbs[ii].setSelected(true);
             }
         });
-        
-        Button skip = new Button("SKIP TUTORIAL");
+        Button skip = new Button("Acceder a mon Compte");
         skip.setUIID("SkipButton");
         skip.addActionListener(e -> new ProfileForm(res).show());
         

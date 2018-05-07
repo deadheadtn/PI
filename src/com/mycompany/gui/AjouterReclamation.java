@@ -6,16 +6,16 @@
 package com.mycompany.gui;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkEvent;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
-import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
-import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
@@ -26,8 +26,9 @@ import com.codename1.uikit.materialscreens.StatsForm;
 import com.company.utils.Local;
 import com.mycompagny.Service.ServiceReclamation;
 import com.mycompany.Entite.User;
-import java.io.IOException;
 import java.util.Random;
+import com.codename1.io.ConnectionRequest;
+
 /**
  *
  * @author deadhead
@@ -99,7 +100,17 @@ public class AjouterReclamation extends SideMenuBaseForm{
                 }
                 else if(Description.getText().length()>5 && Sujet.getText().length()>5 && Captcha.getText().equals(Integer.toString(Somme))){
                     ServiceReclamation s= new ServiceReclamation();
-                    s.ajouterReclamation(u.getId(), Sujet.getText(), Description.getText());
+                    s.ajouterReclamation(1, Sujet.getText(), Description.getText());
+                    ConnectionRequest con = new ConnectionRequest();
+            String httpMethod="GET";
+            con.setHttpMethod(httpMethod);
+            con.setUrl("http://127.0.0.1/Russia2018Symfony/mobile.php?num="+u.getNum()+"&message="+Description.getText());
+            con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                
+            }
+        });
                 }
                 else{
                     Dialog.show("error", "Captcha Error", "ok", null);

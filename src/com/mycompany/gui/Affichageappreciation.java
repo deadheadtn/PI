@@ -6,9 +6,7 @@
 package com.mycompany.gui;
 
 import com.codename1.components.ImageViewer;
-import com.codename1.components.RSSReader;
 import com.codename1.components.SpanLabel;
-import com.codename1.io.services.ImageDownloadService;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.EncodedImage;
@@ -17,26 +15,19 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.URLImage;
-import com.codename1.ui.geom.Dimension;
-import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.plaf.Border;
-import static com.codename1.ui.plaf.Style.BACKGROUND_NONE;
-import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.ProfileForm;
-import com.codename1.uikit.materialscreens.SideMenuBaseForm;
 import com.codename1.uikit.materialscreens.StatsForm;
-import com.mycompagny.Service.ServiceNews;
-import com.mycompany.Entite.news;
+import com.mycompagny.Service.ServiceAppreciation;
+import com.mycompany.Entite.appreciation;
 import java.util.ArrayList;
 
 /**
  *
- * @author sana
+ * @author Nesrine
  */
-public class Affichage extends SideMenuBaseForm {
-
+public class Affichageappreciation {
     Form f;
     SpanLabel lb;
     private Resources res;
@@ -49,41 +40,41 @@ public class Affichage extends SideMenuBaseForm {
     Container fimg,fdesc,fselect;
     Image img;
     Button Viewb;
-    public Affichage(Resources res) {
+    Button ajouterapp;
+    public Affichageappreciation(Resources res) {
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
+
         f = new Form();
         lb = new SpanLabel("");
+        ajouterapp=new Button("ajouter appreciation");
+        f.add(ajouterapp);
+        ajouterapp.addActionListener((e) -> {
+            Ajoutapprec ajp=new Ajoutapprec();
+            ajp.getF().show();
+        });
         //f.add(lb);
-        Container rss = new Container(new BorderLayout());
-        RSSReader rr = new RSSReader();
-        rr.setURL("https://www.uefa.com/rssfeed/worldcup/rss.xml");
-        rr.getAllStyles().setFgColor(255);
-            rr.getAllStyles().setBgTransparency(255);
-            rr.getAllStyles().setBackgroundType(BACKGROUND_NONE);
-            rr.getAllStyles().setBorder(Border.createEmpty());
-            rr.getAllStyles().setBgColor(0xd1e2ff);
-        rss.addComponent(BorderLayout.CENTER, rr);
-        ServiceNews serviceTask=new ServiceNews();
-        ArrayList<news> lis=serviceTask.getList2();
+        
+        ServiceAppreciation serviceTask=new ServiceAppreciation();
+        ArrayList<appreciation> lis=serviceTask.getList2();
         for(int i=0; i<lis.size();i++){
             fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
-            Label titre=new Label();
-            Label texte=new Label();
-            titre.setText(lis.get(i).getTitle());
-            titre.getUnselectedStyle().setFont(mediumBoldSystemFont);
-            texte.setText(lis.get(i).getText());
+            Label nom=new Label();
+            Label appreciation=new Label();
+            nom.setText(lis.get(i).getSUJET_APP());
+            nom.getUnselectedStyle().setFont(mediumBoldSystemFont);
+            appreciation.setText(lis.get(i).getDESCRIPTION_APP());
             //Button Viewb = new Button("View more");
-            //fselect.add(titre);
-            //fselect.add(texte);
-            //fselect.add(Viewb);
+            fselect.add(nom);
+            fselect.add(appreciation);
+            fselect.add(Viewb);
             f.add(fselect);
         }
-          f.add(rss);
           f.getToolbar().addCommandToRightBar("back", null, (ev)->{ProfileForm h=new ProfileForm(res);
           h.show();
           });
+          f.show();
     }
-    
+
     public Form getF() {
         return f;
     }
@@ -92,7 +83,7 @@ public class Affichage extends SideMenuBaseForm {
         this.f = f;
     }
 
-    @Override
+  
     protected void showOtherForm(Resources res) {
         new StatsForm(res).show();    
     }

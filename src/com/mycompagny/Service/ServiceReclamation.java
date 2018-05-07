@@ -63,9 +63,10 @@ public class ServiceReclamation {
                     
                     for (Map<String, Object> obj : list) {
                         Reclamation Rec = new Reclamation();
+                        Rec.setId_reclamation((int) Float.parseFloat(obj.get("id_reclamation").toString()));
                         Rec.setSUJET_REC(obj.get("sujet_rec").toString());
                         Rec.setDESCRIPTION_REC(obj.get("description_rec").toString());
-                        Rec.setETAT_REC(obj.get("description_rec").toString());
+                        Rec.setETAT_REC((int) Float.parseFloat(obj.get("etat_rec").toString()));
                   listTasks.add(Rec);
                     }
                 } catch (IOException ex) {
@@ -76,5 +77,19 @@ public class ServiceReclamation {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listTasks;
     }
+    public void setetat(int id) {
+        ConnectionRequest con = new ConnectionRequest();
+        String httpMethod="GET";
+        con.setHttpMethod(httpMethod);
+        con.setUrl("http://127.0.0.1/Russia2018Symfony/web/app_dev.php/admin/manage/reclamation/editjson/"+id);
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                String str = new String(con.getResponseData());
+                    System.err.println(str);
 
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+    }
 }
