@@ -13,6 +13,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.Entite.Reclamation;
+import com.mycompany.Entite.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,20 @@ import java.util.Map;
  */
 public class ServiceReclamation {
 
+    public void sendsms(User u){
+        ConnectionRequest con = new ConnectionRequest();
+            String url = "http://127.0.0.1/Russia2018Symfony/mobile.php?num="+u.getNum()+"&message=Reclamation envoyer";
+                    System.err.println(url);
+            con.setUrl(url);
+            
+            con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                String str = new String(con.getResponseData());
+            System.err.println(str);
+            }
+            });
+    }
     public void ajouterReclamation(int iduser,String sujet,String Description) {
         ConnectionRequest con = new ConnectionRequest();
         String Url = "http://127.0.0.1/Russia2018Symfony/web/app_dev.php/admin/manage/reclamation/addjson?id_user="+iduser+"&sujet="+sujet+"&Description="+Description;
@@ -81,7 +96,7 @@ public class ServiceReclamation {
         ConnectionRequest con = new ConnectionRequest();
         String httpMethod="GET";
         con.setHttpMethod(httpMethod);
-        con.setUrl("http://127.0.0.1/Russia2018Symfony/web/app_dev.php/admin/manage/reclamation/editjson/"+id);
+        con.setUrl("http://127.0.0.1/Russia2018Symfony/updatesujet.php?sujet="+id);
         con.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
