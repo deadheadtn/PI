@@ -9,6 +9,7 @@ import com.codename1.components.ImageViewer;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Font;
 import com.codename1.ui.Form;
@@ -113,6 +114,7 @@ public class AfficherReclamation extends SideMenuBaseForm {
                 for(int i=0; i<lis.size();i++){
                     if(lis.get(i).getSUJET_REC().equals(titre.getText())){
                         r.setetat(lis.get(i).getId_reclamation());
+                        Dialog.show("Sucess", "Reclamation Marqué comme resolu", "ok", null);
                     }
                 }
             }

@@ -27,6 +27,7 @@ import com.codename1.ui.validation.LengthConstraint;
 import com.codename1.ui.validation.RegexConstraint;
 import com.codename1.ui.validation.Validator;
 import com.codename1.uikit.materialscreens.ProfileForm;
+import com.company.utils.Local;
 import com.mycompagny.Service.ServiceHotel;
 import com.mycompany.Entite.Hotel;
 import com.mycompany.Entite.Reservation;
@@ -146,23 +147,22 @@ Validator val = new Validator();
                 lbDate.setText("La Date D'arrivee est : "+datePicker.getText());
                 lbDate2.setText("La Date Du depart est : "+datePicker2.getText());
                 lbDate3.setText("Le Type est :"+stringPicker.getText());
-Reservation r =new Reservation();
+                Reservation r =new Reservation();
 
-r.setDate_arrivee(datePicker.getText());
-r.setDate_depart(datePicker2.getText());
-Integer a = Integer.parseInt(nbr_nuit.getText());
-r.setNbr_nuit(a);
-Integer b = Integer.parseInt(nbr_cham.getText());
-r.setNbr_chambre(b);
-Integer c = Integer.parseInt(nbr_perso.getText());
-r.setNbr_personne(c);
-r.setType(stringPicker.getText());
-r.setId_hotel(h.getID_hotel());
+                r.setDate_arrivee(datePicker.getText());
+                r.setDate_depart(datePicker2.getText());
+                Integer a = Integer.parseInt(nbr_nuit.getText());
+                r.setNbr_nuit(a);
+                Integer b = Integer.parseInt(nbr_cham.getText());
+                r.setNbr_chambre(b);
+                Integer c = Integer.parseInt(nbr_perso.getText());
+                r.setNbr_personne(c);
+                r.setType(stringPicker.getText());
+                r.setId_hotel(h.getID_hotel());
                 System.out.println(r.getId_hotel());
                 ServiceHotel aa =new ServiceHotel();
              //   Reservation tt=new Reservation(0, 0,0, datePicker, datePicker2, 0, stringPicker, 0, 0);
                 aa.ajoutTask(r);
-                
                     f2.show();
                 }
             else{

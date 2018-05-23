@@ -30,6 +30,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
+import com.company.utils.Local;
 import com.mycompany.Entite.Transport;
 import com.mycompany.gui.Affichage;
 import com.mycompany.gui.AffichageHotel;
@@ -64,15 +65,28 @@ public abstract class SideMenuBaseForm extends Form {
     }
     
     public void setupSideMenu(Resources res) {
+        Local a = new Local();
+        String nom = a.getUser().getNom();
         Image profilePic = res.getImage("user-picture.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label("  Jennifer Wilson", profilePic, "SideMenuTitle");
+        Label profilePicLabel = new Label(nom, profilePic, "SideMenuTitle");
         profilePicLabel.setMask(mask.createMask());
             Transport t =new Transport();
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
+        
+                  
+        getToolbar().addComponentToSideMenu(sidemenuTop);
+        getToolbar().addMaterialCommandToSideMenu("  Accueil", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
+        getToolbar().addMaterialCommandToSideMenu("  Actualités", FontImage.MATERIAL_TRENDING_UP,  e -> new Affichage(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation Hotel", FontImage.MATERIAL_ACCESS_TIME,  e -> new AffichageHotel(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  Reservation Transport", FontImage.MATERIAL_ACCESS_TIME,  e ->new AffichageTransport(t, res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  Equipes", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageequipe(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  FeedBack", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageappreciation(res).getF().show());
+        getToolbar().addMaterialCommandToSideMenu("  Tickets", FontImage.MATERIAL_SMARTPHONE,  e -> new TicketForm(res).getF().show() );
+        getToolbar().addMaterialCommandToSideMenu("  Reclamation", FontImage.MATERIAL_EXIT_TO_APP,  e -> new AjouterReclamation(res).getF().show());
         getToolbar().addMaterialCommandToSideMenu("  Joueurs", FontImage.MATERIAL_DASHBOARD,  e -> new Affichagejoueur(res).getF().show());
       //  getToolbar().addMaterialCommandToSideMenu("  Statistiques", FontImage.MATERIAL_DASHBOARD, e -> new Statistic(res).getF().show());
       
@@ -89,16 +103,6 @@ public abstract class SideMenuBaseForm extends Form {
 
             
         });
-                  
-        getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Accueil", FontImage.MATERIAL_DASHBOARD,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Actualités", FontImage.MATERIAL_TRENDING_UP,  e -> new Affichage(res).getF().show());
-        getToolbar().addMaterialCommandToSideMenu("  Reservation Hotel", FontImage.MATERIAL_ACCESS_TIME,  e -> new AffichageHotel(res).getF().show());
-        getToolbar().addMaterialCommandToSideMenu("  Reservation Transport", FontImage.MATERIAL_ACCESS_TIME,  e ->new AffichageTransport(t, res).getF().show());
-        getToolbar().addMaterialCommandToSideMenu("  Equipes", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageequipe(res).getF().show());
-        getToolbar().addMaterialCommandToSideMenu("  FeedBack", FontImage.MATERIAL_EXIT_TO_APP,  e -> new Affichageappreciation(res).getF().show());
-        getToolbar().addMaterialCommandToSideMenu("Tickets", FontImage.MATERIAL_SMARTPHONE,  e -> new TicketForm(res).getF().show() );
-        getToolbar().addMaterialCommandToSideMenu("  Reclamation", FontImage.MATERIAL_EXIT_TO_APP,  e -> new AjouterReclamation(res).getF().show());
     }
     
     protected abstract void showOtherForm(Resources res);

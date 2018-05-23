@@ -11,6 +11,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
+import com.company.utils.Local;
 import com.mycompany.Entite.Hotel;
 import com.mycompany.Entite.Transport;
 
@@ -32,7 +33,8 @@ public class ServiceTransport {
     
         public void ajoutTask(Reservationt ta) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://127.0.0.1/Russia2018Symfony/web/app_dev.php/client/mobilereservation2?" +"idTransport="+ta.getId_transport()+"&type="+ta.getType()+"&dateArrivee="+ta.getDate_arrivee()+"&dateDepart="+ta.getDate_depart()+"&depart="+ta.getDepart()+"&destination="+ta.getDestination()+"&nbrVoyageurs="+ta.getNbr_voyageurs() ;
+        Local a = new Local();
+        String Url = "http://127.0.0.1/Russia2018Symfony/web/app_dev.php/client/mobilereservation2?" +"idTransport="+ta.getId_transport()+"&type="+ta.getType()+"&dateArrivee="+ta.getDate_arrivee()+"&dateDepart="+ta.getDate_depart()+"&depart="+ta.getDepart()+"&destination="+ta.getDestination()+"&nbrVoyageurs="+ta.getNbr_voyageurs() +"&id_utilisateur="+a.getUser().getId();
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());

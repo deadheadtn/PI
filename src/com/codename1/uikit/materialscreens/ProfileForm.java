@@ -20,20 +20,29 @@
 package com.codename1.uikit.materialscreens;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.ImageViewer;
 import com.codename1.components.MultiButton;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
+import com.company.utils.Local;
+import com.mycompagny.Service.ServiceEquipe;
+import com.mycompany.Entite.equipe;
+import java.util.ArrayList;
 
 /**
  * Represents a user profile in the app, the first form we open after the walkthru
@@ -41,8 +50,22 @@ import com.codename1.ui.util.Resources;
  * @author Shai Almog
  */
 public class ProfileForm extends SideMenuBaseForm {
+    String url="";
+        private Resources theme =UIManager.initFirstTheme("/theme");
+        private Resources res;
+    Label label;
+    Label Titre;
+    Label texte,nom;
+    ImageViewer imageViewer;
+    EncodedImage imgEncodedImage;
+    URLImage urlImage;
+    Container fimg,fdesc,fselect;
+    Image img;
+    Button Viewb;
     public ProfileForm(Resources res) {
+        
         super(BoxLayout.y());
+        theme = UIManager.initFirstTheme("/theme_1");
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
         Image profilePic = res.getImage("user-picture.jpg");
@@ -54,42 +77,50 @@ public class ProfileForm extends SideMenuBaseForm {
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
-        
-        Container remainingTasks = BoxLayout.encloseY(
-                        new Label("12", "CenterTitle"),
-                        new Label("remaining tasks", "CenterSubTitle")
-                );
-        remainingTasks.setUIID("RemainingTasks");
-        Container completedTasks = BoxLayout.encloseY(
-                        new Label("32", "CenterTitle"),
-                        new Label("completed tasks", "CenterSubTitle")
-        );
-        completedTasks.setUIID("CompletedTasks");
-
+        Local a = new Local();
+        String nom = a.getUser().getNom();
         Container titleCmp = BoxLayout.encloseY(
                         FlowLayout.encloseIn(menuButton),
                         BorderLayout.centerAbsolute(
                                 BoxLayout.encloseY(
-                                    new Label("Jennifer Wilson", "Title"),
-                                    new Label("UI/UX Designer", "SubTitle")
+                                    new Label(nom+" "+a.getUser().getPrenom(), "Title"),
+                                    new Label(a.getUser().getUsername(), "SubTitle")
                                 )
-                            ).add(BorderLayout.WEST, profilePicLabel),
-                        GridLayout.encloseIn(2, remainingTasks, completedTasks)
-                );
+                            ).add(BorderLayout.WEST, profilePicLabel)
+        );
         
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
         fab.getAllStyles().setMarginUnit(Style.UNIT_TYPE_PIXELS);
-        fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
                         
         add(new Label("Today", "TodayTitle"));
-        
+        ServiceEquipe serviceTask=new ServiceEquipe();
+        ArrayList<equipe> lis=serviceTask.getList2();
+        for(equipe e :lis){
+            url="http://127.0.0.1/Russia2018Symfony/web/images/"+e.getLOGO();
+            System.out.println("path = "+url);
+            
+            imgEncodedImage = EncodedImage.createFromImage(theme.getImage("round-mask.png"),false);
+            urlImage = URLImage.createToStorage(imgEncodedImage, url, url);
+            imageViewer = new ImageViewer(urlImage);
+            System.out.println("path = "+url);
+            fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
+            Label nom1=new Label(e.getNOM_EQUIPE());
+            Label groupe=new Label();
+            nom1.setText(e.getNOM_EQUIPE());
+            Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
+            nom1.getUnselectedStyle().setFont(mediumBoldSystemFont);
+            groupe.setText(e.getGROUPE());
+            Button Viewb = new Button("View more");
+            fselect.add(nom1);
+            fselect.add(groupe);
+            fselect.add(imageViewer);
+            //fselect.add(Viewb);
+            
+            add(fselect);
+        }
         FontImage arrowDown = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "Label", 3);
-        
-        addButtonBottom(arrowDown, "Finish landing page concept", 0xd997f1, true);
-        addButtonBottom(arrowDown, "Design app illustrations", 0x5ae29d, false);
-        addButtonBottom(arrowDown, "Javascript training ", 0x4dc2ff, false);
-        addButtonBottom(arrowDown, "Surprise Party for Matt", 0xffc06f, false);
+
         setupSideMenu(res);
     }
     

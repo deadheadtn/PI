@@ -12,6 +12,7 @@ import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BoxLayout;
+import com.company.utils.Local;
 import com.mycompagny.Service.ServiceAppreciation;
 import com.mycompany.Entite.appreciation;
 
@@ -52,7 +53,9 @@ public class Ajoutapprec {
             sp1.ajoutAppreciation(p);}
             
             Message m =new Message("test");
-            Display.getInstance().sendMessage(new String[]{"nesrine.harrouch@esprit.tn"},"un feedBack a été ajouté", m);
+            Local a = new Local();
+            
+            Display.getInstance().sendMessage(new String[]{a.getUser().getEmail()},"un feedBack a été ajouté", m);
         });
         
       f.show();

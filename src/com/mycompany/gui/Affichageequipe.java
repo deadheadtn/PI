@@ -50,13 +50,13 @@ public class Affichageequipe {
         f = new Form();
         lb = new SpanLabel("");
         //f.add(lb);
-        
+        theme = UIManager.initFirstTheme("/theme_1");
         ServiceEquipe serviceTask=new ServiceEquipe();
         ArrayList<equipe> lis=serviceTask.getList2();
         for(equipe e :lis){
-            url="http://localhost/PIa/image/equipes/"+e.getLOGO();
+            url="http://127.0.0.1/Russia2018Symfony/web/images/"+e.getLOGO();
             System.out.println("path = "+url);
-            imgEncodedImage = EncodedImage.createFromImage(theme.getImage("round.png"),false);
+            imgEncodedImage = EncodedImage.createFromImage(theme.getImage("round-mask.png"),false);
             urlImage = URLImage.createToStorage(imgEncodedImage, url, url);
             imageViewer = new ImageViewer(urlImage);
             fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));

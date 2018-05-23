@@ -21,7 +21,7 @@ public class MyApplication {
     private Resources theme;
 
     public void init(Object context) {
-        theme = UIManager.initFirstTheme("/theme");
+        theme = UIManager.initFirstTheme("/theme_1");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);

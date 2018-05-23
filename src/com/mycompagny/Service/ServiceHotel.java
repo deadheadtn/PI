@@ -11,6 +11,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
+import com.company.utils.Local;
 import com.mycompany.Entite.Hotel;
 import com.mycompany.Entite.Reservation;
 import com.mycompany.Entite.Task;
@@ -27,11 +28,13 @@ import java.util.Map;
 public class ServiceHotel {
      public void ajoutTask(Reservation ta) {
         ConnectionRequest con = new ConnectionRequest();
+        Local a = new Local();
         //String Url = "http://127.0.0.1/Russia2018Symfony/web/app_dev.php/mobilereservation?" +"idHotel="+ta.getId_hotel()+"&type="+ta.getType() + "&dateArrivee="+ta.getDate_arrivee()+"&dateDepart="+ta.getDate_depart()+"&nbrNuit="+ta.getNbr_nuit()+"&nbrChambre="+ta.getNbr_chambre()+"&nbrPersonne="+ta.getNbr_personne();
-        String Url = "http://127.0.0.1/Russia2018Symfony/web/app_dev.php/client/mobilereservation?" +"idHotel="+ta.getId_hotel()+"&type="+ta.getType() + "&dateArrivee="+ta.getDate_arrivee()+"&dateDepart="+ta.getDate_depart()+"&nbrNuit="+ta.getNbr_nuit()+"&nbrChambre="+ta.getNbr_chambre()+"&nbrPersonne="+ta.getNbr_personne();
+        String Url = "http://127.0.0.1/Russia2018Symfony/web/app_dev.php/client/mobilereservation?" +"idHotel="+ta.getId_hotel()+"&type="+ta.getType() + "&dateArrivee="+ta.getDate_arrivee()+"&dateDepart="+ta.getDate_depart()+"&nbrNuit="+ta.getNbr_nuit()+"&nbrChambre="+ta.getNbr_chambre()+"&nbrPersonne="+ta.getNbr_personne()+"&id_utilisateur="+a.getUser().getId();
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());
+            System.out.println(str);
 //            if (str.trim().equalsIgnoreCase("OK")) {
 //                f2.setTitle(tlogin.getText());
 //             f2.show();

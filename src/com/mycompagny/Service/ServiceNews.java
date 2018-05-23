@@ -61,7 +61,6 @@ public class ServiceNews {
                     for (Map<String, Object> obj : list) {
                         news NEWS = new news();
                         float id = Float.parseFloat(obj.get("id_news").toString());
-                        
                         NEWS.setId_news((int) id);
                         NEWS.setTitle(obj.get("titre_n").toString());
                         NEWS.setText(obj.get("texte_n").toString());

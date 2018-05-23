@@ -52,9 +52,9 @@ public class LoginForm extends Form {
         setUIID("LoginForm");
         Container welcome = FlowLayout.encloseCenter(
                 new Label("Welcome, ", "WelcomeWhite"),
-                new Label("Jennifer", "WelcomeBlue")
+                new Label("", "WelcomeBlue")
         );
-        
+        welcome.getAllStyles().setFgColor(0x0000);
         getTitleArea().setUIID("Container");
         
         Image profilePic = theme.getImage("user-picture.jpg");
@@ -64,7 +64,10 @@ public class LoginForm extends Form {
         profilePicLabel.setMask(mask.createMask());
         
         TextField login = new TextField("deadhead", "Login", 20, TextField.EMAILADDR) ;
+        login.getAllStyles().setFgColor(0x0000);
+        
         TextField password = new TextField("123", "Password", 20, TextField.PASSWORD) ;
+        password.getAllStyles().setFgColor(0x0000);
         login.getAllStyles().setMargin(LEFT, 0);
         password.getAllStyles().setMargin(LEFT, 0);
         Label loginIcon = new Label("", "TextField");

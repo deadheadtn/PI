@@ -49,6 +49,7 @@ public class Affichage extends SideMenuBaseForm {
     Container fimg,fdesc,fselect;
     Image img;
     Button Viewb;
+    private Resources theme =UIManager.initFirstTheme("/theme_1");
     public Affichage(Resources res) {
         Font mediumBoldSystemFont = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
         f = new Form();
@@ -56,26 +57,32 @@ public class Affichage extends SideMenuBaseForm {
         //f.add(lb);
         Container rss = new Container(new BorderLayout());
         RSSReader rr = new RSSReader();
-        rr.setURL("https://www.uefa.com/rssfeed/worldcup/rss.xml");
+        //rr.setURL("https://www.uefa.com/rssfeed/worldcup/rss.xml");
         rr.getAllStyles().setFgColor(255);
             rr.getAllStyles().setBgTransparency(255);
             rr.getAllStyles().setBackgroundType(BACKGROUND_NONE);
             rr.getAllStyles().setBorder(Border.createEmpty());
             rr.getAllStyles().setBgColor(0xd1e2ff);
-        rss.addComponent(BorderLayout.CENTER, rr);
+       // rss.addComponent(BorderLayout.CENTER, rr);
         ServiceNews serviceTask=new ServiceNews();
+        theme = UIManager.initFirstTheme("/theme_1");
         ArrayList<news> lis=serviceTask.getList2();
         for(int i=0; i<lis.size();i++){
+            String url= lis.get(i).getImage();
+            imgEncodedImage = EncodedImage.createFromImage(theme.getImage("round-mask.png"),false);
+            urlImage = URLImage.createToStorage(imgEncodedImage, url, url);
+            imageViewer = new ImageViewer(urlImage);
             fselect  = new Container (new BoxLayout(BoxLayout.Y_AXIS));
             Label titre=new Label();
             Label texte=new Label();
             titre.setText(lis.get(i).getTitle());
             titre.getUnselectedStyle().setFont(mediumBoldSystemFont);
             texte.setText(lis.get(i).getText());
-            //Button Viewb = new Button("View more");
-            //fselect.add(titre);
-            //fselect.add(texte);
+            Button Viewb = new Button("View more");
+            fselect.add(titre);
+            fselect.add(texte);
             //fselect.add(Viewb);
+            fselect.add(imageViewer);
             f.add(fselect);
         }
           f.add(rss);
